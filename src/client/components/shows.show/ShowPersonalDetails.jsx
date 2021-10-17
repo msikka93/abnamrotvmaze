@@ -57,9 +57,9 @@ export default function ShowPersonalDetails ({ showDetails }: Props) {
     if(item.id == 'summary'){
       const regex = /(<([^>]+)>)/ig
       var summary=showDetails[item.id]
-      const result = summary.replace(regex, '');
+      const result = summary && summary.replace(regex, '');
       return (<Typography paragraph variant="body2" color="inherit">
-      {result || '---'}
+      {result || 'Show Description will be available soon'}
     </Typography>)
     }
     if(item.id == 'network'){

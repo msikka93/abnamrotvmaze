@@ -69,10 +69,10 @@ export default function ShowsTiles ({
             searchedshow.show.image?<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={searchedshow.show.image.medium}/>:<Avatar/>
           }
           action={
-            <Rating name="read-only" value={searchedshow.show.rating.average} readOnly size="small"/>
+            <Rating name="read-only" value={searchedshow.show.rating && searchedshow.show.rating.average} readOnly size="small"/>
           }
-          title={searchedshow.show.name}
-          subheader={`Premiered ${searchedshow.show.premiered}`}
+          title={searchedshow.show.name ? searchedshow.show.name : 'NA'}
+          subheader={`Premiered ${searchedshow.show.premiered && searchedshow.show.premiered}`}
         />
         <CardMedia
           component="img"
@@ -82,10 +82,10 @@ export default function ShowsTiles ({
         />
         <CardContent>
           <Typography noWrap variant="body2" color="inherit">
-            {searchedshow.show.summary.replace(regex, '')}
+            {searchedshow.show.summary?searchedshow.show.summary.replace(regex, ''):'Show Description will be available soon'}
           </Typography>
           <Typography variant="body2" color="secondary">
-            {`Genre: ${searchedshow.show.genres}`}
+            {`Genre: ${searchedshow.show.genres.length ? searchedshow.show.genres : 'Comedy,Action,Drama'}`}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
@@ -100,7 +100,7 @@ export default function ShowsTiles ({
       </CardActions>
       <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{searchedshow.show.summary.replace(regex, '')}</Typography>
+          <Typography paragraph>{searchedshow.show.summary?searchedshow.show.summary.replace(regex, ''):'Show Description will be available soon'}</Typography>
         </CardContent>
       </Collapse>
       </Card>

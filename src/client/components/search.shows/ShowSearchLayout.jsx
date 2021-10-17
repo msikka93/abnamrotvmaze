@@ -43,29 +43,27 @@ export default function ShowSearchLayout ({
             Submit(data)
           })}
         >
-          <div key='show_search' style={{ display: 'flex' }}>
-            <TextField
-              label='Show'
-              required={true}
-              type='text'
-              name='show_search'
-              id='input-show-details-show_search'
-              variant='outlined'
-              disabled={false}
-              inputRef={register({
-                required: true
-              })}
-            />
-            <Button
-              style={{marginLeft:'1rem'}}
-              id='btn-save-emp-create'
-              variant='contained'
-              color='primary'
-              type='submit'
-            >
-              Search
-            </Button>
-          </div>
+          <TextField
+            label='Show'
+            required={true}
+            type='text'
+            name='show_search'
+            id='standard-basic'
+            variant='standard'
+            disabled={false}
+            inputRef={register({
+              required: true
+            })}
+          />
+          <Button
+            style={{ marginLeft: '1rem' }}
+            id='btn-save-emp-create'
+            variant='contained'
+            color='primary'
+            type='submit'
+          >
+            Search
+          </Button>
         </form>
       </div>
       <div style={{ marginTop: '15px' }}>

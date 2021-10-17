@@ -1,7 +1,7 @@
 import * as types from './showActionTypes'
 import fetch from '../../helpers/fetch'
 import { showSnack } from 'react-redux-snackbar'
-import { closePopup } from 'react-redux-popup'
+
 
 export const receiveShowList = payload => ({
   type: types.SHOWS_FETCHED,
@@ -33,11 +33,23 @@ export function fetchShows () {
         var data = response.responseJSON
         if (Array.isArray(data)) {
           dispatch(receiveShowList(data))
+          dispatch(
+            showSnack({
+              type: 'Success',
+              message: 'All Shows are fetched successfully!'
+            })
+          )
         } else {
           var myData = Object.keys(data).map(key => {
             return data[key]
           })
           dispatch(receiveShowList(myData))
+          dispatch(
+            showSnack({
+              type: 'Success',
+              message: 'All Shows are fetched successfully!'
+            })
+          )
         }
       })
       .catch(err => {
@@ -63,12 +75,34 @@ export function fetchSearchedShows (searchedItem: string) {
   return dispatch => {
     return fetch(`/shows/search/shows?q=${searchedItem.show_search}`)
       .then(response => {
+        if(!response.responseJSON.length){
+          dispatch(
+            showSnack({
+              type: 'error',
+              message: 'Show not found! Please try with another show name'
+            })
+          )
           dispatch(receiveSearchedShows(response.responseJSON))
+        }
+        else{
+          dispatch(
+            showSnack({
+              type: 'Success',
+              message: 'Searched Shows have been fetched successfully!'
+            })
+          )
+          dispatch(receiveSearchedShows(response.responseJSON))
+        } 
       })
       .catch(err => {
-        // silently ignore
         console.log(err)
         dispatch(receiveError(err))
+        dispatch(
+          showSnack({
+            type: 'error',
+            message: 'Something went wrong while fetching the records'
+          })
+        )
       })
   }
 }
