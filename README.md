@@ -30,6 +30,11 @@ Clone the repo (or alternatively you can download the repo):
 
 ```
  git clone https://github.com/msikka93/abnamrotvmaze.git
+
+ These two are two separate public repositories (statefull components) for DIALOG and SNACKBAR which are included in package.json
+ You can also clone these two respositories also to check the code for dialog and snackbar
+ "react-redux-popup": "git+https://github.com/msikka93/react-redux-popup.git"
+ "react-redux-snackbar": "git+https://github.com/msikka93/react-redux-snackbar.git"
 ```
 
 It will create a directory called `tvshowmazeui` inside the current folder.<br>
