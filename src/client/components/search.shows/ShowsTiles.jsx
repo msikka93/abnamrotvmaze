@@ -1,111 +1,166 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import type { ShowListType } from '../../flow-types/showsTypes'
-import { styled } from '@material-ui/core/styles'
-import Rating from '@material-ui/lab/Rating'
-import MuiAlert from '@material-ui/lab/Alert'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Link from '@material-ui/core/Link'
 import Avatar from '@material-ui/core/Avatar'
-import ExpandMore from '@material-ui/icons/ExpandMore'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import CardHeader from '@material-ui/core/CardHeader'
-import CardMedia from '@material-ui/core/CardMedia'
-import CardActions from '@material-ui/core/CardActions'
-import Typography from '@material-ui/core/Typography'
-import { red } from '@material-ui/core/colors'
-import IconButton from '@material-ui/core/IconButton'
-import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
-import Collapse from '@material-ui/core/Collapse'
+import Rating from '@material-ui/lab/Rating'
+import { AgGridReact } from 'ag-grid-react'
 
-const ExpandMoreTile = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}))
-
-function Alert (props) {
-  return <MuiAlert elevation={6} variant='filled' {...props} />
-}
+// export const sortRows = (
+//   initialRows: ShowListType,
+//   sortColumn: string,
+//   sortDirection: string
+// ) => (rows: ShowListType) => {
+//   const comparer = (a, b) => {
+//     if (sortDirection === 'ASC') {
+//       return a[sortColumn] > b[sortColumn] ? 1 : -1
+//     } else if (sortDirection === 'DESC') {
+//       return a[sortColumn] < b[sortColumn] ? 1 : -1
+//     }
+//   }
+//   // $FlowFixMe
+//   return sortDirection === 'NONE' ? initialRows : [...rows].sort(comparer)
+// }
 
 export const NoDataView = () => (
   <center>
-    <div style={{ marginTop: '1rem' }}>
-      <Alert severity='Info'>Here you can search the desired TV shows</Alert>
+    <div style={{ marginTop: '10rem' }}>
+      <CircularProgress size={80} thickness={6.12} />
     </div>
   </center>
 )
 
-type Props = {
-  shows: ShowListType,
+export const getColumns = () => {
+  return [
+    {
+      field: 'name',
+      headerName: 'Name'
+    },
+    {
+      colId: 'image',
+      headerName: 'Show Avatar',
+      valueGetter: params => <Avatar src={params.data.image?.medium} />
+    },
+    {
+      field: 'type',
+      headerName: 'Type'
+    },
+    {
+      colId: 'rating',
+      headerName: 'User Rating',
+      valueGetter: params => {
+        return (
+          <span>
+            <Rating
+              name='read-only'
+              value={params.data.rating?.average}
+              readOnly
+              size='small'
+            />
+          </span>
+        )
+      }
+    },
+    {
+      colId: 'country',
+      headerName: 'Country',
+      valueGetter: params => {
+        return (
+          <span>
+            {params.data.network
+              ? (
+                <div>{params.data.network.country.name}</div>
+                )
+              : (
+                <div>NA</div>
+                )}
+          </span>
+        )
+      }
+    },
+    {
+      colId: 'imdb',
+      headerName: 'IMDb Rating',
+      valueGetter: params => (
+        <span>
+          {params.data.rating.average
+            ? (
+              <div>{params.data.rating.average}</div>
+              )
+            : (
+              <div>0.0</div>
+              )}
+        </span>
+      )
+    },
+    {
+      colId: 'url',
+      headerName: 'Show Link',
+      valueGetter: params => (
+        <Link target='_blank' href={params.data.url} underline='hover' rel='noreferrer'>
+          Show Link
+        </Link>
+      )
+    }
+  ]
 }
 
-export default function ShowsTiles ({
-  shows
+type Props = {
+  shows: ShowListType,
+  handleViewShow: (id: string) => void,
+  showsLastEditedAt: number
+}
+
+export default function ShowsGrid ({
+  shows,
+  showsLastEditedAt,
+  handleViewShow
 }: Props) {
-  if (!__CLIENT__) return null
   if (!shows.length) {
     return <NoDataView />
   }
-  const [expandedId, setExpandedId] = useState(-1)
-  
-  const handleExpandClick = (i) => {
-    setExpandedId(expandedId === i ? -1 : i);
-  }
-  
-  const regex = /(<([^>]+)>)/ig
-  
+  const [rows, setRows] = useState(shows)
+  const inputEl = useRef(null)
+  const defaultColDef = useMemo(
+    () => ({
+      resizable: true,
+      sortable: true,
+      enableFilter: true
+    }),
+    []
+  )
+  // if the list has been edited, state update is required
+  useEffect(() => {
+    setRows(shows)
+  }, [showsLastEditedAt])
+  // useEffect(() => {
+  //   const idx = shows.length && shows.length - 1
+  //   if (idx) {
+  //     const top = inputEl.current.getRowOffsetHeight() * idx
+  //     const gridCanvas = inputEl.current
+  //       .getDataGridDOMNode()
+  //       .querySelector('.react-grid-Canvas')
+  //     gridCanvas.scrollTop = top
+  //   }
+  // }, [shows.length])
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={8} columns={{ xs: 4, sm: 8, md: 12 }}>
-      {shows.map((searchedshow,i) =>(
-        <Card key={searchedshow.show.id} style={{maxWidth:'340px',margin:'2px'}}>
-        <CardHeader
-          avatar={
-            searchedshow.show.image?<Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={searchedshow.show.image.medium}/>:<Avatar/>
-          }
-          action={
-            <Rating name="read-only" value={searchedshow.show.rating && searchedshow.show.rating.average} readOnly size="small"/>
-          }
-          title={searchedshow.show.name ? searchedshow.show.name : 'NA'}
-          subheader={`Premiered ${searchedshow.show.premiered && searchedshow.show.premiered}`}
-        />
-        <CardMedia
-          component="img"
-          height="194"
-          image={searchedshow.show.image?searchedshow.show.image.medium:""}
-          alt="Show Image"
-        />
-        <CardContent>
-          <Typography noWrap variant="body2" color="inherit">
-            {searchedshow.show.summary?searchedshow.show.summary.replace(regex, ''):'Show Description will be available soon'}
-          </Typography>
-          <Typography variant="body2" color="secondary">
-            {`Genre: ${searchedshow.show.genres.length ? searchedshow.show.genres : 'Comedy,Action,Drama'}`}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-        <ExpandMoreTile
-          expand={expandedId === i}
-          onClick={() => handleExpandClick(i)}
-          aria-expanded={expandedId === i}
-          aria-label="show more"
-        >
-          <ExpandMore />
-        </ExpandMoreTile>
-      </CardActions>
-      <Collapse in={expandedId === i} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>{searchedshow.show.summary?searchedshow.show.summary.replace(regex, ''):'Show Description will be available soon'}</Typography>
-        </CardContent>
-      </Collapse>
-      </Card>
-      ))}
-      </Grid>
-    </Box> 
+    <div
+      id='myGrid'
+      style={{
+        height: '450px',
+        width: '95vw'
+      }}
+      className='ag-theme-alpine-dark'
+    >
+      <AgGridReact
+        reactUi='true'
+        ref={inputEl}
+        columnDefs={getColumns()}
+        defaultColDef={defaultColDef}
+        rowData={rows}
+        rowSelection='single'
+        enableSorting
+      />
+    </div>
   )
 }

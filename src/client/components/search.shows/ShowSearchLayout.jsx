@@ -16,15 +16,18 @@ import Button from '@material-ui/core/Button'
 type Props = {
   fetchSearchedShows: (a: {}) => void,
   isLoading: boolean,
-  hasError: boolean
+  hasError: boolean,
+  shows: ShowListType,
+  showsLastEditedAt: number
 }
 
-const ShowTilesWithLoading = WithLoading(ShowsTiles)
-export default function ShowSearchLayout ({
+const ShowGridWithLoading = WithLoading(ShowsTiles)
+export default function ShowsLayout ({
   fetchSearchedShows,
   shows,
   isLoading,
   hasError,
+  showsLastEditedAt
 }: Props) {
   const { handleSubmit, register, reset } = useForm({
     defaultValues: {}
@@ -38,14 +41,14 @@ export default function ShowSearchLayout ({
       <div style={{ display: 'flex' }}>
         <Typography variant='h5'>Search Shows</Typography>
         <form
-          style={{marginLeft:'auto', float:'left'}}
+          style={{ marginLeft: 'auto', float: 'left' }}
           onSubmit={handleSubmit(data => {
             Submit(data)
           })}
         >
           <TextField
             label='Show'
-            required={true}
+            required
             type='text'
             name='show_search'
             id='standard-basic'
@@ -69,11 +72,13 @@ export default function ShowSearchLayout ({
       <div style={{ marginTop: '15px' }}>
         <Divider />
       </div>
-      <br /><br/>
-      <ShowTilesWithLoading
+      <br />
+      <br />
+      <ShowGridWithLoading
         shows={shows}
         isLoading={isLoading}
         hasError={hasError}
+        showsLastEditedAt={showsLastEditedAt}
       />
     </div>
   )

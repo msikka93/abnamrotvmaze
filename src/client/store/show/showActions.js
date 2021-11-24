@@ -2,12 +2,10 @@ import * as types from './showActionTypes'
 import fetch from '../../helpers/fetch'
 import { showSnack } from 'react-redux-snackbar'
 
-
 export const receiveShowList = payload => ({
   type: types.SHOWS_FETCHED,
   payload
 })
-
 
 export const receiveError = () => ({
   type: types.SHOWS_ERROR
@@ -23,14 +21,13 @@ export const receiveSearchedShows = payload => ({
   payload
 })
 
-
 export function fetchShows () {
   return dispatch => {
     return fetch('/shows/shows', {
       method: 'GET'
     })
       .then(response => {
-        var data = response.responseJSON
+        const data = response.responseJSON
         if (Array.isArray(data)) {
           dispatch(receiveShowList(data))
           dispatch(
@@ -40,7 +37,7 @@ export function fetchShows () {
             })
           )
         } else {
-          var myData = Object.keys(data).map(key => {
+          const myData = Object.keys(data).map(key => {
             return data[key]
           })
           dispatch(receiveShowList(myData))
@@ -62,7 +59,7 @@ export function fetchShowByShowId (showId: string) {
   return dispatch => {
     return fetch(`/shows/shows/${showId}`)
       .then(response => {
-            dispatch(receiveShow(response.responseJSON))
+        dispatch(receiveShow(response.responseJSON))
       })
       .catch(err => {
         // silently ignore
@@ -75,7 +72,8 @@ export function fetchSearchedShows (searchedItem: string) {
   return dispatch => {
     return fetch(`/shows/search/shows?q=${searchedItem.show_search}`)
       .then(response => {
-        if(!response.responseJSON.length){
+        const data = response.responseJSON
+        if (!response.responseJSON.length) {
           dispatch(
             showSnack({
               type: 'error',
@@ -83,16 +81,18 @@ export function fetchSearchedShows (searchedItem: string) {
             })
           )
           dispatch(receiveSearchedShows(response.responseJSON))
-        }
-        else{
+        } else {
           dispatch(
             showSnack({
               type: 'Success',
               message: 'Searched Shows have been fetched successfully!'
             })
           )
-          dispatch(receiveSearchedShows(response.responseJSON))
-        } 
+          const myData = Object.keys(data).map(key => {
+            return data[key].show
+          })
+          dispatch(receiveSearchedShows(myData))
+        }
       })
       .catch(err => {
         console.log(err)
@@ -106,6 +106,3 @@ export function fetchSearchedShows (searchedItem: string) {
       })
   }
 }
-
-
-
