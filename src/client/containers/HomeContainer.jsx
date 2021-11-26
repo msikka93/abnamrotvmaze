@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Home from '../components/base/Home'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 export class HomeContainer extends Component {
   render () {

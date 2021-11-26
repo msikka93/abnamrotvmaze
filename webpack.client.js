@@ -44,7 +44,6 @@ module.exports = {
       'react',
       'redux',
       'react-dom',
-      'react-router',
       'react-intl'
     ]
   },
