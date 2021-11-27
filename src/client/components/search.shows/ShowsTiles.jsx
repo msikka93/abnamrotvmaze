@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Link from '@material-ui/core/Link'
 import Avatar from '@material-ui/core/Avatar'
 import Rating from '@material-ui/lab/Rating'
-import { AgGridReact } from 'ag-grid-react'
+import { AgGridReact,AgGridColumn } from 'ag-grid-react'
 
 // export const sortRows = (
 //   initialRows: ShowListType,
@@ -29,7 +29,11 @@ export const NoDataView = () => (
     </div>
   </center>
 )
-
+var numberValueFormatter = function (params) {
+  if(params.data.rating.average){
+    return params.data.rating.average.toFixed(1);
+  }
+};
 export const getColumns = () => {
   return [
     {
@@ -39,6 +43,7 @@ export const getColumns = () => {
     {
       colId: 'image',
       headerName: 'Show Avatar',
+      filter:false,
       valueGetter: params => <Avatar src={params.data.image?.medium} />
     },
     {
@@ -48,6 +53,7 @@ export const getColumns = () => {
     {
       colId: 'rating',
       headerName: 'User Rating',
+      filter:false,
       valueGetter: params => {
         return (
           <span>
@@ -63,38 +69,56 @@ export const getColumns = () => {
     },
     {
       colId: 'country',
+      sortable: true,
       headerName: 'Country',
+      filter: 'agTextColumnFilter',
+      filterParams: {
+        cellRenderer: (params: any) => {
+          if(params.data.network){
+            return params.data.network.country.name
+          }
+          else{
+            return "N.A"
+          }
+        }
+      },
       valueGetter: params => {
-        return (
-          <span>
-            {params.data.network
-              ? (
-                <div>{params.data.network.country.name}</div>
-                )
-              : (
-                <div>NA</div>
-                )}
-          </span>
-        )
+        if(params.data.network){
+          return params.data.network.country.name
+        }
+        else{
+          return "N.A"
+        }
       }
     },
     {
       colId: 'imdb',
       headerName: 'IMDb Rating',
-      valueGetter: params => (
-        <span>
-          {params.data.rating.average
-            ? (
-              <div>{params.data.rating.average}</div>
-              )
-            : (
-              <div>0.0</div>
-              )}
-        </span>
-      )
+      filter: 'agNumberColumnFilter',
+      cellClass: 'number-cell',
+      filterParams: {
+        cellRenderer: (params: any) => {
+          if(params.data.rating.average){
+            return params.data.rating.average
+          }
+          else{
+            return 0.0
+          }
+        }
+      },
+      valueGetter: params => {
+        if(params.data.rating.average){
+          return params.data.rating.average
+        }
+        else{
+          return 0.0
+        }
+      },
+      valueFormatter:numberValueFormatter
     },
     {
       colId: 'url',
+      filter:false,
       headerName: 'Show Link',
       valueGetter: params => (
         <Link target='_blank' href={params.data.url} underline='hover' rel='noreferrer'>
@@ -125,7 +149,7 @@ export default function ShowsGrid ({
     () => ({
       resizable: true,
       sortable: true,
-      enableFilter: true
+      filter: true
     }),
     []
   )
@@ -160,7 +184,7 @@ export default function ShowsGrid ({
         rowData={rows}
         rowSelection='single'
         enableSorting
-      />
+      />  
     </div>
   )
 }
