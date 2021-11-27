@@ -1,93 +1,93 @@
 /* lato-100normal - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-display: swap;
   font-weight: 100;
   src: local("Lato Thin "), local("Lato-Thin"), url(5d621ef7ab4241807ec2b95eb1d607cc.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiNWE4ZWI3NzUyNTllMzJkOTY1MjFiZDFhODYzNzgxZjMud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-100italic - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: italic;
   font-display: swap;
   font-weight: 100;
   src: local("Lato Thin italic"), local("Lato-Thinitalic"), url(89b95baaf00652c7c3afa0b255dc3d42.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiZTUwMWU1MmZhZGZhY2I1MzI5ZWQ3OTdkOTFiMTAyMDkud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-300normal - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-display: swap;
   font-weight: 300;
   src: local("Lato Light "), local("Lato-Light"), url(917632e36982ca7933c801de445a1812.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiNGQ5NmY5ZTY4NWE1NGQxZWY2Y2ZkNDc3N2IxYTVmYzEud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-300italic - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: italic;
   font-display: swap;
   font-weight: 300;
   src: local("Lato Light italic"), local("Lato-Lightitalic"), url(dc62e1fd720db6f7d41857fab0cb92d4.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiOTFhZWRmMDk5OGE4MWYxYTc4ZTNiZjllYTYzM2IwZmQud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-400normal - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-display: swap;
   font-weight: 400;
   src: local("Lato Regular "), local("Lato-Regular"), url(65e877e527022735c1a1bf5ae6183cf6.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiMzE5ZGYwZjU0OTIwNjJiNTQ2YjBkZTlkY2I1NjhjYjkud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-400italic - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: italic;
   font-display: swap;
   font-weight: 400;
   src: local("Lato Regular italic"), local("Lato-Regularitalic"), url(09172b1910dff418491f31e28ca0c1d8.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiMTdlNzI0NGY0Yjc4YzZiMmM3ZTE0OWNjNDNlYTYzODQud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-700normal - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-display: swap;
   font-weight: 700;
   src: local("Lato Bold "), local("Lato-Bold"), url(f1405bd8a987c2ea8a67be8c371af61b.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiYTM1NGJiMGIwYjBmMjJkZTdiZWZjZmEzNDBhNDVhODQud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-700italic - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: italic;
   font-display: swap;
   font-weight: 700;
   src: local("Lato Bold italic"), local("Lato-Bolditalic"), url(5da2171e8560e58e6c91443d4addab8f.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiYmU3ZjNkMzJhMTM4YmE2NGI5ZDA0ZmEzYTg3ZDRlYWEud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-900normal - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: normal;
   font-display: swap;
   font-weight: 900;
   src: local("Lato Black "), local("Lato-Black"), url(f33015cf2124b2046860d524d73bb84a.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiMjJmMWQ5N2JlMjc1Yzk0ZTMwZDcwY2JjZmY0YzIyZmUud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /* lato-900italic - latin */
 @font-face {
-  font-family: 'Lato';
+  font-family: "Lato";
   font-style: italic;
   font-display: swap;
   font-weight: 900;
   src: local("Lato Black italic"), local("Lato-Blackitalic"), url(0e059de01500f773b5282613f528838c.woff2) format("woff2"), url(data:application/font-woff;base64,ZXhwb3J0IGRlZmF1bHQgX193ZWJwYWNrX3B1YmxpY19wYXRoX18gKyAiYmQyOTAwMGQxNGI3ODI0ODRiMzI0N2NkZDJiYmU3ZWYud29mZiI7) format("woff");
-  /* Modern Browsers */ }
-
+  /* Modern Browsers */
+}
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
  * Copyright 2011-2018 Twitter, Inc.
