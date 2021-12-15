@@ -32,7 +32,7 @@ export function fetchShows () {
           dispatch(receiveShowList(data))
           dispatch(
             showSnack({
-              type: 'Success',
+              type: 'success',
               message: 'All Shows are fetched successfully!'
             })
           )
@@ -43,7 +43,7 @@ export function fetchShows () {
           dispatch(receiveShowList(myData))
           dispatch(
             showSnack({
-              type: 'Success',
+              type: 'success',
               message: 'All Shows are fetched successfully!'
             })
           )
@@ -84,7 +84,7 @@ export function fetchSearchedShows (searchedItem: string) {
         } else {
           dispatch(
             showSnack({
-              type: 'Success',
+              type: 'success',
               message: 'Searched Shows have been fetched successfully!'
             })
           )

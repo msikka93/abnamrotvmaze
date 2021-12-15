@@ -54,7 +54,7 @@ describe('books actions', () => {
         {
             "snackProps":{
                 "message":"All Shows are fetched successfully!",
-                "type":"Success"
+                "type":"success"
             },
             "type":"snackbar.SHOW"
         }]
@@ -137,7 +137,7 @@ describe('books actions', () => {
         {
             "snackProps":{
                 "message":"All Shows are fetched successfully!",
-                "type":"Success"
+                "type":"success"
             },
             "type":"snackbar.SHOW"
         }]

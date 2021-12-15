@@ -184,6 +184,8 @@ export default function ShowsGrid ({
         rowData={rows}
         rowSelection='single'
         enableSorting
+        pagination={true}
+        paginationAutoPageSize={true}
       />  
     </div>
   )
